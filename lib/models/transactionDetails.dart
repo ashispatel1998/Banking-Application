@@ -1,5 +1,5 @@
 class TransactionDetail{
-  static const tblTransaction="transactions";
+  static const tblTransaction="transactiontable";
   static const colTransactionId='transactionId';
   static const colSenderAccId='senderAccId';
   static const colSenderName='senderName';

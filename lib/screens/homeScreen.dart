@@ -1,4 +1,5 @@
 import 'package:banking_application/main.dart';
+import 'package:banking_application/screens/CheckBalanceScreen.dart';
 import 'package:banking_application/screens/accountInformationScreen.dart';
 import 'package:banking_application/screens/moneyTransfer.dart';
 import 'package:banking_application/screens/transactionHistoryScreen.dart';
@@ -67,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       prefs.setString('dob', dob);
       prefs.setInt('accountBalance', accountBalance);
       prefs.setString('lastLogin', _lastLogin);
+      accountBalance=prefs.getInt('accountBalance');
     });
   }
 
@@ -74,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
     SharedPreferences prefs = await _prefs;
     setState(() {
       mobileno=prefs.getString("mobileno");
+      getBankInfo();
     });
-    getBankInfo();
   }
 
   _cardStyle(String title,String subTitle,IconData iconName,int selectedItem){
@@ -103,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(context,MaterialPageRoute(builder: (context)=>AccountInformationScreen()));
                 }
                 else if(selectedItem==2){
-                  print("2");
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>CheckBalance()));
                 }
                 else if(selectedItem==3){
                   Navigator.push(context,MaterialPageRoute(builder: (context)=>MoneyTransfer()));
@@ -151,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView(
               children: <Widget>[
                 _cardStyle("Account Information","Holder: ${name}",_icons[0],1),
-                _cardStyle("Account Balance","Rs. ${accountBalance}",_icons[1],2),
+                _cardStyle("Account Balance","Secure",_icons[1],2),
                 _cardStyle("Money Transfer","Secure Transaction",_icons[2],3),
                 _cardStyle("Transactions","All your transactions",_icons[3],4),
               ],

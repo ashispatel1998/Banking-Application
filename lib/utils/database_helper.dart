@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 
 class DatabaseHelper{
-  static const _databaseName="bank2.db";
+  static const _databaseName="bank6.db";
   static const _databaseVersion=1;
 
   // Singleton class
@@ -63,7 +63,7 @@ class DatabaseHelper{
      ${TransactionDetail.colReceiverAccId} INTEGER NOT NULL,
      ${TransactionDetail.colReceiverName} TEXT NOT NULL,
      ${TransactionDetail.colAmountTransfer} INTEGER NOT NULL,
-     ${TransactionDetail.colTransactionDate} TEXT NOT NULL,
+     ${TransactionDetail.colTransactionDate} TEXT NOT NULL
     )
     ''');
   }
@@ -72,9 +72,27 @@ class DatabaseHelper{
     Database db= await database;
     try {
       return await db.insert(User.tblUser, user.toMap());
-    }catch(e){
+    }
+    catch(e){
       Fluttertoast.showToast(
           msg: "Mobile no exists!!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white
+      );
+    }
+  }
+
+  Future<int> insertTransaction(TransactionDetail transactionDetail) async{
+    Database db= await database;
+    try {
+      return await db.insert(TransactionDetail.tblTransaction, transactionDetail.toMap());
+    }
+    catch(e){
+      Fluttertoast.showToast(
+          msg: "$e",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIos: 1,
@@ -108,6 +126,17 @@ class DatabaseHelper{
     }
   }
 
+  Future<List> getBankInfoReceiver(int id,String name) async{
+    Database db=await database;
+    List<Map> list=await db.rawQuery('''
+    SELECT * FROM ${BankDetail.tblBankDetail} WHERE ${BankDetail.colaccId}='$id' AND ${BankDetail.colName}='$name';
+    ''');
+    if(list.length>0){
+      return  list.toList();
+    }
+  }
+
+
   Future<String> getLastLoginStatus(String mobile) async{
     Database db=await database;
     List<Map> list=await db.rawQuery('''
@@ -125,5 +154,18 @@ class DatabaseHelper{
     };
     int res=await db.update(User.tblUser, row,where: '${User.colMobileno}=?',whereArgs: [mobile]);
     return res;
+  }
+
+  Future<bool> updateBankBalance(int accid,int amount) async{
+    Database db=await database;
+    Map<String,dynamic> row={
+      BankDetail.colAccountBalance:amount
+    };
+    int res=await db.update(BankDetail.tblBankDetail, row,where:'${BankDetail.colaccId}=?',whereArgs: [accid] );
+    if(res!=null){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

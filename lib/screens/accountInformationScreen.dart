@@ -9,12 +9,16 @@ class AccountInformationScreen extends StatefulWidget {
 class _AccountInformationScreenState extends State<AccountInformationScreen> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  DateTime _currentDate=DateTime.now();
+
   int accId;
   String name;
   String email;
   String mobileno;
   String dob;
   String lastLogin;
+  int age;
+
 
   @override
   void initState() {
@@ -31,6 +35,9 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
       dob=prefs.getString("dob");
       mobileno=prefs.get("mobileno");
       lastLogin=prefs.getString("lastLogin");
+      age=int.parse(dob.substring(0,4).toString());
+      age=_currentDate.year-age;
+      print("Account Information");
     });
   }
 
@@ -73,7 +80,7 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                  child: Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: ListTile(
-                     leading: Icon(Icons.person,size: 50,color: Colors.lightGreen,),
+                     leading: Icon(Icons.person,size: 50,color: Colors.deepPurple,),
                      title: Text("Holder Name",
                        style: TextStyle(
                            fontSize: 20,
@@ -119,7 +126,7 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                  child: Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: ListTile(
-                     leading: Icon(Icons.calendar_today,size: 50,color: Colors.blueAccent,),
+                     leading: Icon(Icons.cake,size: 50,color: Colors.blueAccent,),
                      title: Text("Date of Birth",
                        style: TextStyle(
                            fontSize: 20,
@@ -142,7 +149,30 @@ class _AccountInformationScreenState extends State<AccountInformationScreen> {
                  child: Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: ListTile(
-                     leading: Icon(Icons.phone,size: 50,color: Colors.blueAccent,),
+                     leading: Icon(Icons.calendar_today,size: 50,color: Colors.lime,),
+                     title: Text("Age",
+                       style: TextStyle(
+                           fontSize: 20,
+                           fontWeight: FontWeight.bold
+                       ),
+                     ),
+                     subtitle: Text("${age}",
+                       style: TextStyle(
+                           fontWeight: FontWeight.w400,
+                           fontSize: 15
+                       ),
+                     ),
+                   ),
+                 ),
+               ),
+             ),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Card(
+                 child: Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: ListTile(
+                     leading: Icon(Icons.phone_android,size: 50,color: Colors.blueAccent,),
                      title: Text("Mobile Number",
                        style: TextStyle(
                            fontSize: 20,

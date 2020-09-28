@@ -217,6 +217,7 @@ class _State extends State<RegistrationScreen> {
                         border: OutlineInputBorder(),
                         labelText: 'Name',
                       ),
+                      textCapitalization: TextCapitalization.characters,
                       validator: validateName,
                       onSaved: (value)=>_name=value,
                     ),
@@ -240,6 +241,7 @@ class _State extends State<RegistrationScreen> {
                         labelText: 'Mobile',
                       ),
                         validator: validateMobile,
+                        keyboardType: TextInputType.number,
                         onSaved: (value)=>_mobile=value
                     ),
                   ),
