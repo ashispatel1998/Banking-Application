@@ -163,6 +163,7 @@ class _MoneyTransferState extends State<MoneyTransfer> {
                     ),
                     keyboardType: TextInputType.number,
                     onSaved: (value){
+                      value=value.trim();
                       _accIdReceiver=int.parse(value);
                     },
                     validator: validateAccountId,
@@ -178,7 +179,7 @@ class _MoneyTransferState extends State<MoneyTransfer> {
                     textCapitalization: TextCapitalization.characters,
                     validator: validateName,
                     onSaved: (value){
-                      _receiverName=value;
+                      _receiverName=value.trim();
                     },
                   ),
                 ),

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 
 class DatabaseHelper{
-  static const _databaseName="bank6.db";
+  static const _databaseName="bankDB.db";
   static const _databaseVersion=1;
 
   // Singleton class
@@ -133,6 +133,19 @@ class DatabaseHelper{
     ''');
     if(list.length>0){
       return  list.toList();
+    }
+  }
+
+  Future<List> getTransactionDetails(int senderAccId) async{
+    Database db=await database;
+    List<Map> list=await db.rawQuery('''
+    SELECT * FROM ${TransactionDetail.tblTransaction} WHERE ${TransactionDetail.colSenderAccId}='$senderAccId';
+    ''');
+    if(list.length>0){
+      return list.toList();
+    }
+    else{
+      return [];
     }
   }
 

@@ -219,7 +219,7 @@ class _State extends State<RegistrationScreen> {
                       ),
                       textCapitalization: TextCapitalization.characters,
                       validator: validateName,
-                      onSaved: (value)=>_name=value,
+                      onSaved: (value)=>_name=value.trim(),
                     ),
                   ),
                   Container(
@@ -230,7 +230,7 @@ class _State extends State<RegistrationScreen> {
                         labelText: 'Email',
                       ),
                       validator: validateEmail,
-                      onSaved: (value)=>_email=value,
+                      onSaved: (value)=>_email=value.trim(),
                     ),
                   ),
                   Container(
@@ -242,7 +242,7 @@ class _State extends State<RegistrationScreen> {
                       ),
                         validator: validateMobile,
                         keyboardType: TextInputType.number,
-                        onSaved: (value)=>_mobile=value
+                        onSaved: (value)=>_mobile=value.trim()
                     ),
                   ),
                   Container(

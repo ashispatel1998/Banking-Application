@@ -114,7 +114,7 @@ class _State extends State<LoginScreen> {
                       ),
                       validator: validateMobile,
                       keyboardType: TextInputType.number,
-                      onSaved: (value)=>_mobile=value,
+                      onSaved: (value)=>_mobile=value.trim(),
                     ),
                   ),
                   Container(
