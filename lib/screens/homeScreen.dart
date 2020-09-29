@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MyHomePage(title: 'MyBanking')
+                      builder: (context) => MyHomePage(title: 'PayNet Bank')
                   ),
                   ModalRoute.withName("/WelcomeScreen")
               );

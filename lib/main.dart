@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MyBanking',
+      title: 'PayNet Bank',
       theme: ThemeData(
         primaryColor: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'MyBanking'),
+      home: MyHomePage(title: 'PayNet Bank'),
       routes: <String, WidgetBuilder> {
         '/Home': (BuildContext context) => new HomeScreen(),
         '/LoginScreen': (BuildContext context) => new LoginScreen(),
